@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <meta name="google-signin-client_id"
+    content="765146576350-65v1102g2mssciuudrsv571evsrtk67q.apps.googleusercontent.com">
+  <style>
+    .data {
+    display: none;
+}
+
+.g-signin2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+}
+  </style>
+  <title>Login</title>
+</head>
+
+<body>
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+  <div class="data">
+    <center><table style="margin-top: 200px;">
+    <tr>
+      <td>
+      <img id="image" class="rounded-circle" width="100" height="100" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <p><b>Name :</b></p>
+      <p id="name"></p>
+    </td>
+    </tr>
+    <tr>
+      <td>
+      <p><b>Email :</b></p>
+      <p id="email"></p>
+    </td>
+    </tr>
+    <tr>
+      <td>
+      <button type="button" class="btn btn-danger" onclick="signOut();">Sign Out</button>
+      </td>
+    </tr>
+</table></center>
+  </div>
+  
+
+
+
+
+<script>
+  function onSignIn(googleUser) 
+{
+  var profile = googleUser.getBasicProfile();
+  $("#name").text(profile.getName());
+  $("#email").text(profile.getEmail());
+  $("#image").attr('src', profile.getImageUrl());
+  $(".data").css("display", "block");
+  $(".g-signin2").css("display", "none");
+}
+
+function signOut() 
+{
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () 
+  {
+      alert("You have been signed out successfully");
+      $(".data").css("display", "none");
+      $(".g-signin2").css("display", "block");
+  });
+}
+</script>
+
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+      crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+
+</html>
